@@ -20,14 +20,14 @@ module deimos.mrss;
 import core.sys.posix.sys.types;
 import etc.c.curl;
 
+extern(C):
+@system nothrow @nogc:
+
 enum LIBMRSS_VERSION_STRING = "0.19.2";
 
 enum LIBMRSS_MAJOR_VERSION = 0;
 enum LIBMRSS_MINOR_VERSION = 19;
 enum LIBMRSS_MICRO_VERSION = 2;
-
-extern(C):
-nothrow @nogc:
 
 alias void* mrss_generic_t;
 
