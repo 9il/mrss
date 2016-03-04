@@ -12,5 +12,11 @@ This library supports:
 
 
 # Author
-
 Andrea Marchesini <bakunin@autistici.org> - Web Site: http://www.autistici.org/bakunin/
+
+# Usage
+```D
+import deimos.mrss;
+import core.sys.posix.sys.types;
+import etc.c.curl;
+```
