@@ -1,7 +1,7 @@
 {
 	"name": "mrss",
 	"description": "Deimos bindings for the mrss library",
-	"homepage": "http://nanomsg.org/",
+	"homepage": "https://github.com/9il/mrss",
 	"license": "LGPL 2.0+",
 	"importPaths": ["."],
 	"libs" : ["mrss"],
