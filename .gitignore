@@ -2,3 +2,5 @@
 *.selections.json
 *.o
 mrss
+
+examples/parser/parser

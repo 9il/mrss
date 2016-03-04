@@ -1,0 +1,2 @@
+name "parser"
+dependency "mrss" version="~>0.0.4"
