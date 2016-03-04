@@ -1,0 +1,20 @@
+{
+	"name": "mrss",
+	"description": "Deimos bindings for the mrss library",
+	"homepage": "http://nanomsg.org/",
+	"license": "LGPL 2.0+",
+	"importPaths": ["."],
+	"libs" : ["mrss"],
+	"configurations" : [
+		{
+			"name": "library",
+			"targetType": "sourceLibrary",
+		},
+		{
+			"name": "unittest",
+			"targetType": "executable",
+			"sourcePaths": ["deimos"],
+			"dflags": ["-main"],
+		}
+	]
+}
