@@ -9,7 +9,7 @@
 		{
 			"name": "library",
 			"targetType": "sourceLibrary",
-			"sourceFiles": ["deimos"],
+			"sourceFiles": ["deimos/mrss.d"],
 		},
 		{
 			"name": "unittest",
