@@ -1,5 +1,9 @@
-libmrss D interface
+libmrss D Wrapper
 ====================
+Ported to the [D Programming language](https://dlang.org) by Laeeth Isharc 2015,2016,2017 with changes by Ilya Yaroshenko.
+
+Generated documentation at [Kaleidic Open Source - MRSS](http://mrss.code.kaleidic.io)
+
 [mRss](http://www.autistici.org/bakunin/libmrss/doc/) is a C library for parsing, writing and creating RSS/ATOM files or streams.
 
 This library supports:

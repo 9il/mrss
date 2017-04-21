@@ -1,0 +1,15 @@
+name "mrss"
+description "Deimos bindings for the mrss library"
+homepage "https://github.com/9il/mrss"
+license "LGPL 2.0+"
+libs "mrss"
+importPaths "."
+configuration "library" {
+	targetType "sourceLibrary"
+	sourceFiles "deimos/mrss.d"
+}
+configuration "unittest" {
+	targetType "executable"
+	dflags "-main"
+	sourcePaths "deimos"
+}

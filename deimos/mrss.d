@@ -15,6 +15,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
+/**
+  [mRss](http://www.autistici.org/bakunin/libmrss/doc/) is a C library for parsing, writing and creating RSS/ATOM files or streams.
+
+  Written 2014,2015,2016,2017 by Laeeth Isharc and Kaleidic Associates Advisory Limited
+  
+  Authors: Laeeth Isharc and Ilya Yaroshenko
+*/
 module deimos.mrss;
 
 import core.sys.posix.sys.types;
@@ -23,38 +30,58 @@ import etc.c.curl;
 extern(C):
 @system nothrow @nogc:
 
+///
 enum LIBMRSS_VERSION_STRING = "0.19.2";
 
+///
 enum LIBMRSS_MAJOR_VERSION = 0;
+///
 enum LIBMRSS_MINOR_VERSION = 19;
+///
 enum LIBMRSS_MICRO_VERSION = 2;
 
+///
 alias void* mrss_generic_t;
 
-/** This enum describes the error type of libmrss */
+/// This enum describes the error type of libmrss
 enum mrss_error_t {
-  MRSS_OK = 0,			/**< No error */
-  MRSS_ERR_POSIX,		/**< For the correct error, use errno */
-  MRSS_ERR_PARSER,		/**< Parser error */
-  MRSS_ERR_DOWNLOAD,		/**< Download error */
-  MRSS_ERR_VERSION,		/**< The RSS has a no compatible VERSION */
-  MRSS_ERR_DATA			/**< The parameters are incorrect */
+  /// No error
+  MRSS_OK = 0,
+  /// For the correct error, use errno
+  MRSS_ERR_POSIX,
+  /// Parser error
+  MRSS_ERR_PARSER,		
+  /// Download error
+  MRSS_ERR_DOWNLOAD,
+  /// The RSS has incompatible version
+  MRSS_ERR_VERSION,
+  /// The parameters are incorrect
+  MRSS_ERR_DATA
 }
 
+///
 enum mrss_version_t {
-  MRSS_VERSION_0_91,		/**< 0.91 RSS version */
-  MRSS_VERSION_0_92,		/**< 0.92 RSS version */
-  MRSS_VERSION_1_0,		/**< 1.0 RSS version */
-  MRSS_VERSION_2_0,		/**< 2.0 RSS version */
-  MRSS_VERSION_ATOM_0_3,	/**< 0.3 Atom version */
-  MRSS_VERSION_ATOM_1_0		/**< 1.0 Atom version */
+  /// 0.91 RSS version
+  MRSS_VERSION_0_91,
+  /// 0.92 RSS version
+  MRSS_VERSION_0_92,
+  /// 1.0 RSS version
+  MRSS_VERSION_1_0,
+  /// 2.0 RSS version
+  MRSS_VERSION_2_0,
+  /// 0.3 Atom version
+  MRSS_VERSION_ATOM_0_3,
+  /// 1.0 Atom version
+  MRSS_VERSION_ATOM_1_0
 }
 
-/** Flag list for mrss_set and mrss_get functions */
+/// Flag list for mrss_set and mrss_get functions
 enum mrss_flag_t {
-  /* Generic */
+  /**
+    Generic:
+  */
 
-  /** Set the ersion to a mrss_t element - the value is a mrss_version_t enum */
+  /** Set the version to a mrss_t element - the value is a mrss_version_t enum */
   MRSS_FLAG_VERSION = 1,
 
   /** Set the title to a mrss_t element - the value is a string */
@@ -96,7 +123,9 @@ enum mrss_flag_t {
   /** Set the about to a mrss_t element - the value is a string */
   MRSS_FLAG_ABOUT,
 
-  /* Contributor */
+  /**
+    Contributor:
+  */
 
   /** Set the contributor to a mrss_t element - the value is a string */
   MRSS_FLAG_CONTRIBUTOR,
@@ -105,7 +134,9 @@ enum mrss_flag_t {
   /** Set the contributor's uri to a mrss_t element - the value is a string */
   MRSS_FLAG_CONTRIBUTOR_URI,
 
-  /* Generator */
+  /**
+    Generator:
+  */
 
   /** Set the generator to a mrss_t element - the value is a string */
   MRSS_FLAG_GENERATOR,
@@ -114,7 +145,9 @@ enum mrss_flag_t {
   /** Set the generator's uri to a mrss_t element - the value is a string */
   MRSS_FLAG_GENERATOR_VERSION,
 
-  /* Image */
+  /**
+    Image:
+  */
 
   /** Set the image_title to a mrss_t element - the value is a string */
   MRSS_FLAG_IMAGE_TITLE,
@@ -131,7 +164,9 @@ enum mrss_flag_t {
   /** Set the image_description to a mrss_t element - the value is a string */
   MRSS_FLAG_IMAGE_DESCRIPTION,
 
-  /* TextInput */
+  /**
+    TextInput:
+  */
 
   /** Set the textinput_title to a mrss_t element - the value is a string */
   MRSS_FLAG_TEXTINPUT_TITLE,
@@ -142,7 +177,10 @@ enum mrss_flag_t {
   /** Set the textinput_link to a mrss_t element - the value is a string */
   MRSS_FLAG_TEXTINPUT_LINK,
 
-  /* Cloud */
+
+  /**
+    Cloud:
+  */
 
   /** Set the cloud to a mrss_t element - the value is a string */
   MRSS_FLAG_CLOUD,
@@ -256,7 +294,9 @@ enum mrss_flag_t {
 
 }
 
-/** Enum for the casting of the libmrss data struct */
+/**
+Enum for the casting of the libmrss data struct
+*/
 enum mrss_element_t {
   /** The data struct is a mrss_t */
   MRSS_ELEMENT_CHANNEL,
@@ -274,11 +314,10 @@ enum mrss_element_t {
   MRSS_ELEMENT_ATTRIBUTE
 }
 
-/** Data struct for any items of RSS. It contains a pointer to the list
- * of categories. 
- *
- * \brief 
- * Struct data for item elements */
+/**
+Data struct for any items of RSS. It contains a pointer to the list
+of categories. 
+*/
 struct mrss_item_t {
 
   /** For internal use only: */
@@ -324,10 +363,9 @@ struct mrss_item_t {
   mrss_item_t *next;
 }
 
-/** Data struct for skipHours elements. 
- *
- * \brief 
- * Struct data for skipHours elements */
+/**
+Data struct for skipHours elements. 
+*/
 struct mrss_hour_t {
   /** For internal use only: */
   mrss_element_t element;
@@ -339,10 +377,9 @@ struct mrss_hour_t {
   mrss_hour_t *next;
 }
 
-/** Data struct for skipDays elements. 
- *
- * \brief 
- * Struct data for skipDays elements */
+/**
+Data struct for skipDays elements. 
+*/
 struct mrss_day_t {
   /** For internal use only: */
   mrss_element_t element;
@@ -354,11 +391,10 @@ struct mrss_day_t {
   mrss_day_t *next;
 }
 
-/** Data struct for category elements
- *
- * \brief 
- * Struct data for category elements */
-struct mrss_category_t {
+/**
+Data struct for category elements
+*/
+ struct mrss_category_t {
   /** For internal use only: */
   mrss_element_t element;
   int allocated;
@@ -371,10 +407,9 @@ struct mrss_category_t {
   mrss_category_t *next;
 }
 
-/** Principal data struct. It contains pointers to any other structures.
- *
- * \brief 
- * Principal data struct. It contains pointers to any other structures */
+/**
+  Principal data struct. It contains pointers to any other structures.
+*/
 struct mrss_t {
   /** For internal use only: */
   mrss_element_t element;
@@ -409,17 +444,17 @@ struct mrss_t {
   int ttl;			/* -	-	-	O	-	*/
   char *about;			/* -	-	R	-	-	*/
   
-  /* Contributor */		/* -	-	-	-	O	*/
+  /// Contributor:		/* -	-	-	-	O	*/
   char *contributor;		/* -	-	-	-	R	*/
   char *contributor_email;	/* -	-	-	-	O	*/
   char *contributor_uri;	/* -	-	-	-	O	*/
 
-  /* Generator */
+  /// Generator:
   char *generator;		/* -	-	-	O	O	*/
   char *generator_uri;		/* -	-	-	-	O	*/
   char *generator_version;	/* -	-	-	-	O	*/
 
-  /* Tag Image: */		/* O	O	O	O	-	*/
+  /// Tag Image:		/* O	O	O	O	-	*/
   char *image_title;		/* R	R	R	R	-	*/
   char *image_url;		/* R	R	R	R	O	*/
   char *image_logo;		/* -	-	-	-	O	*/
@@ -428,13 +463,13 @@ struct mrss_t {
   uint image_height;	/* O	O	-	O	-	*/
   char *image_description;	/* O	O	-	O	-	*/
 
-  /* TextInput: */		/* O	O	O	O	-	*/
+  /// TextInput: 		/* O	O	O	O	-	*/
   char *textinput_title;	/* R	R	R	R	-	*/
   char *textinput_description;	/* R	R	R	R	-	*/
   char *textinput_name;		/* R	R	R	R	-	*/
   char *textinput_link;		/* R	R	R	R	-	*/
 
-  /* Cloud */
+  /// Cloud:
   char *cloud;			/* -	O	-	O	-	*/
   char *cloud_domain;		/* -	R	-	R	-	*/
   int cloud_port;		/* -	R	-	R	-	*/
@@ -455,60 +490,58 @@ struct mrss_t {
     void *c_locale;
 }
 
-/** Data struct for any other tag out of the RSS namespace.
- *
- * \brief 
- * Struct data for external tags */
+/**
+Data struct for any other tag out of the RSS namespace.
+Struct data for external tags
+*/
 struct mrss_tag_t {
   /** For internal use only: */
   mrss_element_t element;
   int allocated;
 
-  /*name of the tag */
+  /// name of the tag
   char *name;
 
-  /* value */
   char *value;
 
-  /* namespace */
+  /// namespace
   char *ns;
 
-  /* list of attributes: */
+  /// list of attributes
   mrss_attribute_t *attributes;
 
-  /* Sub tags: */
+  /// Sub tags
   mrss_tag_t *children;
 
-  /* the next tag: */
+  /// the next tag
   mrss_tag_t *next;
 }
 
-/** Data struct for the attributes of the tag
- *
- * \brief 
- * Struct data for external attribute */
+/**
+Data struct for the attributes of the tag
+Struct data for external attribute
+*/
 struct mrss_attribute_t {
-  /** For internal use only: */
+  /// For internal use only
   mrss_element_t element;
   int allocated;
 
-  /* name of the tag */
+  /// name of the tag
   char *name;
 
-  /* value */
+  /// value
   char *value;
 
-  /* namespace */
+  /// namespace
   char *ns;
   
-  /* The next attribute: */
+  /// The next attribute
   mrss_attribute_t *next;
 }
 
-/** Options data struct. It contains some user preferences.
- *
- * \brief 
- * Options data struct. It contains some user preferences. */
+/**
+Options data struct. It contains some user preferences.
+*/
 struct mrss_options_t {
   int timeout;
   char *proxy;
@@ -521,38 +554,50 @@ struct mrss_options_t {
   char *user_agent;
 }
 
-/** PARSE FUNCTIONS *********************************************************/
+/**
+  Parse Functions:
+*/
 
 /**
- * Parses a url and creates the data struct of the feed RSS url.
- * This function downloads your request if this is http or ftp.
- * \param url The url to be parsed
- * \param mrss the pointer to your data struct
- * \return the error code
- */
+Parses a url and creates the data struct of the feed RSS url.
+This function downloads your request if this is http or ftp.
+Params:
+  url = The url to be parsed
+  mrss = the pointer to your data struct
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_parse_url		(char *		url,
 					 mrss_t **	mrss);
 
 /**
- * Like the previous function but with a options struct.
- * \param url The url to be parsed
- * \param mrss the pointer to your data struct
- * \param options a pointer to a options data struct
- * \return the error code
- */
+Parses a url and creates the data struct of the feed RSS url.
+This function downloads your request if this is http or ftp.
+with an options struct.
+Params:
+  url = The url to be parsed
+  mrss =the pointer to your data struct
+  options = a pointer to a options data struct
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_parse_url_with_options
 					(char *		url,
 					 mrss_t **	mrss,
 					 mrss_options_t	* options);
 
 /**
- * Like the previous function but with CURLcode error
- * \param url The url to be parsed
- * \param mrss the pointer to your data struct
- * \param options a pointer to a options data struct. It can be NULL
- * \param curlcode the error code from libcurl
- * \return the error code
- */
+Parses a url and creates the data struct of the feed RSS url.
+This function downloads your request if this is http or ftp.
+with an options struct and CURLcode error
+Params:
+  url = The url to be parsed
+  mrss = the pointer to your data struct
+  options = a pointer to a options data struct. It can be null
+  curlcode = the error code from libcurl
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_parse_url_with_options_and_error
 					(char *		url,
 					 mrss_t **	mrss,
@@ -560,16 +605,18 @@ mrss_error_t	mrss_parse_url_with_options_and_error
 					 CURLcode *	curlcode);
 
 /**
- * Like the previous function but you take ownership of the downloaded buffer
- * in case of success
- * \param url The url to be parsed
- * \param mrss the pointer to your data struct
- * \param options a pointer to a options data struct
- * \param curlcode the error code from libcurl
- * \param feed_content a pointer to the buffer with the document. This is not NULL terminated
- * \param feed_size the size of the buffer above
- * \return the error code
- */
+Like the previous function but you take ownership of the downloaded buffer
+in case of success
+Params:
+  url = The url to be parsed
+  mrss = the pointer to your data struct
+  options = a pointer to a options data struct
+  curlcode = the error code from libcurl
+  feed_content = a pointer to the buffer with the document. This is not null terminated
+  feed_size = the size of the buffer above
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_parse_url_with_options_error_and_transfer_buffer
 					(char *		url,
 					 mrss_t **	mrss,
@@ -579,293 +626,332 @@ mrss_error_t	mrss_parse_url_with_options_error_and_transfer_buffer
 					 int  *		feed_size);
 
 /** 
- * Parses a file and creates the data struct of the feed RSS url
- * \param file The file to be parsed
- * \param mrss the pointer to your data struct
- * \return the error code
- */
+Parses a file and creates the data struct of the feed RSS url
+Params:
+  file = the file to be parsed
+  mrss = the pointer to your data struct
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_parse_file		(char *		file,
 					 mrss_t **	mrss);
 
 /** 
- * Parses a buffer and creates the data struct of the feed RSS url
- * \param buffer Pointer to the xml memory stream to be parsed
- * \param size_buffer The size of the array of char
- * \param mrss the pointer to your data struct
- * \return the error code
- */
+  Parses a buffer and creates the data struct of the feed RSS url
+  Params:
+    buffer = Pointer to the xml memory stream to be parsed
+    size_buffer = The size of the array of char
+    mrss = the pointer to your data struct
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_parse_buffer	(char *		buffer,
 					 size_t		size_buffer,
 					 mrss_t **	mrss);
 
-/** WRITE FUNCTIONS *********************************************************/
+/**
+  Write Functions:
+*/
 
 /** 
- * Writes a RSS struct data in a local file
- * \param mrss the rss struct data
- * \param file the local file
- * \return the error code
- */
+Writes a RSS struct data in a local file
+Params:
+  mrss = the rss struct data
+  file = the local file
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_write_file		(mrss_t *	mrss,
 					 char *		file);
 
 /**
- * Write a RSS struct data in a buffer.
- *
- * \code
- * char *buffer;
- * buffer=NULL; //<--- This is important!!
- * mrss_write_buffer (mrss, &buffer);
- * \endcode
- *
- * The buffer must be NULL.
- * \param mrss the rss struct data
- * \param buffer the buffer
- * \return the error code
- */
+ Write a RSS struct data in a buffer.
+
+`
+  char *buffer;
+  buffer=null; //<--- This is important!!
+  mrss_write_buffer (mrss, &buffer);
+`
+The buffer must be null.
+
+Params:
+  mrss = the rss struct data
+  buffer = the buffer
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_write_buffer	(mrss_t *	mrss,
 					 char **	buffer);
 
-/** FREE FUNCTION ***********************************************************/
+/**
+Free Function:
+*/
 
 /** 
- * This function frees any type of data struct of libmrss. If the element
- * is alloced by libmrss, it will be freed, else this function frees
- * only the internal data.
- *
- * \code
- * mrss_t *t=....;
- * mrss_item_t *item=...;
- *
- * mrss_free(t);
- * mrss_free(item);
- * \endcode
- *
- * \param element the data struct
- * \return the error code
- */
+Frees any type of data struct of libmrss. If the element is alloced by libmrss, it will be freed, else this function frees
+only the internal data.
+`
+  mrss_t *t=....;
+  mrss_item_t *item=...;
+
+  mrss_free(t);
+  mrss_free(item);
+`
+Params:
+  element = the data struct
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_free		(mrss_generic_t	element);
 
-/** GENERIC FUNCTION ********************************************************/
+/**
+Generic Functions:
+*/
 
 /** 
- * This function returns a static string with the description of error code
- * \param err the error code that you need as string
- * \return a string. Don't free this string!
- */
+  This function returns a static string with the description of error code
+  Params:
+    err = the error code that you need as string
+  Returns:
+    a string. Don't free this string!
+*/
 char *		mrss_strerror		(mrss_error_t	err);
 
 /** 
- * This function returns a static string with the description of curl code
- * \param err the error code that you need as string
- * \return a string. Don't free this string!
- */
+This function returns a static string with the description of curl code
+Params:
+  err = the error code that you need as string
+Returns:
+  a string. Don't free this string!
+*/
 char *		mrss_curl_strerror	(CURLcode	err);
 
 /**
- * This function returns the mrss_element_t of a mrss data struct.
- * \param element it is the element that you want check
- * \param ret it is a pointer to a mrss_element_t. It will be sets.
- * \return the error code
- */
+  Returns the mrss_element_t of a mrss data struct.
+  Params:
+    element = it is the element that you want check
+    ret = pointer to a mrss_element_t. It will be sets.
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_element		(mrss_generic_t	element,
 					 mrss_element_t *ret);
 
 /**
- * This function returns the number of seconds sinze Jennuary 1st 1970 in the
- * UTC time zone, for the url that the urlstring parameter specifies.
- *
- * \param urlstring the url
- * \param lastmodified is a pointer to a time_t struct. The return value can
- * be 0 if the HEAD request does not return a Last-Modified value.
- * \return the error code
+  Returns the number of seconds sinze January 1st 1970 in the
+  UTC time zone, for the url that the urlstring parameter specifies.
+ 
+  Params:
+    urlstring = the url
+    lastmodified = pointer to a time_t struct. The return value can
+    be 0 if the HEAD request does not return a Last-Modified value.
+ 
+  Returns:
+    the error code
+*/
  */
 mrss_error_t	mrss_get_last_modified	(char *		urlstring,
 					 time_t *	lastmodified);
 
 /**
- * Like the previous function but with a options struct.
- *
- * \param urlstring the url
- * \param lastmodified is a pointer to a time_t struct. The return value can
- * be 0 if the HEAD request does not return a Last-Modified value.
- * \param options a pointer to a options struct
- * \return the error code
+  Returns the number of seconds sinze January 1st 1970 in the
+  UTC time zone, for the url that the urlstring parameter specifies.
+  With options struct
+
+  Params:
+    urlstring = the url
+    lastmodified = pointer to a time_t struct. The return value can
+    be 0 if the HEAD request does not return a Last-Modified value.
+    options = a pointer to a options struct
+  Returns:
+    the error code
  */
 mrss_error_t	mrss_get_last_modified_with_options
 					(char *		urlstring,
 					 time_t *	lastmodified,
 					 mrss_options_t * options);
 /**
- * Like the previous function but with a CURLcode pointer.
- *
- * \param urlstring the url
- * \param lastmodified is a pointer to a time_t struct. The return value can
- * be 0 if the HEAD request does not return a Last-Modified value.
- * \param options a pointer to a options struct
- * \param curl_code it will contain the error code of libcurl
- * \return the error code
- */
+  Returns the number of seconds sinze January 1st 1970 in the
+  UTC time zone, for the url that the urlstring parameter specifies.
+  With options struct and CURLcode pointer.
+ 
+ Params:
+  urlstring = the url
+  lastmodified = pointer to a time_t struct. The return value can
+  be 0 if the HEAD request does not return a Last-Modified value.
+  options = a pointer to a options struct
+  curl_code = error code of libcurl
+ Returns:
+  the error code
+*/
 mrss_error_t	mrss_get_last_modified_with_options_and_error
 					(char *		urlstring,
 					 time_t *	lastmodified,
 					 mrss_options_t * options,
 					 CURLcode *	curl_code);
 
-/** EDIT FUNCTIONS **********************************************************/
+/**
+  Edit Functions:
+*/
 
-/** If you want create a new feed RSS from scratch, you need use
- * this function as the first.
- *
- * \code
- * mrss_t *d;
- * mrss_error_t err;
- * char *string;
- * int integer;
- *
- * d=NULL; // ->this is important! If d!=NULL, mrss_new doesn't alloc memory.
- * mrss_new(&d);
- *
- * err=mrss_set (d,
- * 		 MRSS_FLAG_VERSION, MRSS_VERSION_0_92,
- * 		 MRSS_FLAG_TITLE, "the title!",
- * 		 MRSS_FLAG_TTL, 12,
- * 		 MRSS_FLAG_END);
- *
- * if(err!=MRSS_OK) printf("%s\n",mrss_strerror(err));
- *
- * err=mrss_get (d,
- * 		 MRSS_FLAG_TITLE, &string,
- * 		 MRSS_FLAG_TTL, &integer,
- * 		 MRSS_FLAG_END);
- *
- * if(err!=MRSS_OK) printf("%s\n",mrss_strerror(err));
- * printf("The title is: '%s'\n", string);
- * printf("The ttl is: '%d'\n", integer);
- * free(string);
- * \endcode
- *
- * \param mrss is the pointer to the new data struct
- * \return the error code
- */
+/**
+  To create a new feed RSS from scratch, use this function as the first.
+
+  `
+    mrss_t *d;
+    mrss_error_t err;
+    char *string;
+    int integer;
+
+    d=null; // ->this is important! If d!=null, mrss_new doesn't alloc memory.
+    mrss_new(&d);
+
+    err=mrss_set (d,
+    		 MRSS_FLAG_VERSION, MRSS_VERSION_0_92,
+    		 MRSS_FLAG_TITLE, "the title!",
+    		 MRSS_FLAG_TTL, 12,
+    		 MRSS_FLAG_END);
+
+    if(err!=MRSS_OK) printf("%s\n",mrss_strerror(err));
+
+    err=mrss_get (d, MRSS_FLAG_TITLE, &string, MRSS_FLAG_TTL, &integer, MRSS_FLAG_END);
+
+    if(err!=MRSS_OK) printf("%s\n",mrss_strerror(err));
+    printf("The title is: '%s'\n", string);
+    printf("The ttl is: '%d'\n", integer);
+    free(string);
+  `
+  Params:
+    mrss = pointer to the new data struct
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_new		(mrss_t **	mrss);
 
 /**
- * For insert/replace/remove a flags use this function as this example:
- * \code
- * mrss_set(mrss, MRSS_FLAG_TITLE, "hello world", MRSS_FLAG_END);
- * mrss_set(item, MRSS_FLAG_DESCRIPTION, NULL, MRSS_FLAG_END);
- * \endcode
- *
- * \param element it is the mrss data that you want changes the the next
- * list of elements. The list is composted by KEY - VALUES and as last
- * element MRSS_FLAG_END. The variable of value depends from key.
- * \see mrss_flag_t
- * \return the error code
- */
+For insert/replace/remove a flags use this function as this example:
+`
+  mrss_set(mrss, MRSS_FLAG_TITLE, "hello world", MRSS_FLAG_END);
+  mrss_set(item, MRSS_FLAG_DESCRIPTION, null, MRSS_FLAG_END);
+`
+
+Params:
+  element = mrss data that you want changes the next list of elements. The list is composted by KEY - VALUES and as last element MRSS_FLAG_END.
+  The variable of value depends from key.
+Returns:
+  the error code
+*/
 mrss_error_t	mrss_set		(mrss_generic_t	element,
 					 ...);
 
 /**
- * This function returns the request arguments. The syntax is the same of
- * mrss_set but the values of the list are pointer to data element (int *,
- * char **). If the key needs a char **, the value will be allocated.
- * \code
- * mrss_get(category, MRSS_FLAG_CATEGORY_DOMAIN, &string, MRSS_FLAG_END);
- * if(string) free(string);
- * \endcode
- * \param element it is any type of mrss data struct.
- * \return the error code
- */
+  returns the request arguments. The syntax is the same of mrss_set but the values of the list are
+  pointer to data element (int *, * char **). If the key needs a char **, the value will be allocated.
+
+  `
+    mrss_get(category, MRSS_FLAG_CATEGORY_DOMAIN, &string, MRSS_FLAG_END);
+    if(string) free(string);
+  `
+  Params:
+    element = any type of mrss data struct
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_get		(mrss_generic_t	element,
 					 ...);
 
 /**
- * This function adds an element to another element. For example you can
- * add a item to a channel, or a category to a item, and so on. Look this
- * example:
- * \code
- *  mrss_item_t *item = NULL;
- * mrss_hour_t *hour = NULL;
- * mrss_day_t day;              // If the element is no null, the function
- * mrss_category_t category,    // does not alloc it
- *
- * mrss_new_subdata(mrss, MRSS_ELEMENT_ITEM, &item);
- * mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPHOURS, &hour);
- * mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPDAYS, &day);
- * mrss_new_subdata(item, MRSS_ELEMENT_ITEM_CATEGORY, &category);
- * \endcode
- * \param element it is the parent element
- * \param subelement it is the type of the child (MRSS_ELEMENT_ITEM,
- * MRSS_ELEMENT_CATEGORY, ...)
- * \param subdata it is the pointer to the new struct. If the pointer
- * of *subdata exists, it will no alloced, else yes.
- * \return the error code
- * \see mrss_element_t
- */
+  adds an element to another element. For example: add a item to a channel, or a category to a item, and so on.
+  Example:
+    `
+      mrss_item_t *item = null;
+      mrss_hour_t *hour = null;
+      mrss_day_t day;              // If the element is no null, the function
+      mrss_category_t category,    // does not alloc it
+
+      mrss_new_subdata(mrss, MRSS_ELEMENT_ITEM, &item);
+      mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPHOURS, &hour);
+      mrss_new_subdata(mrss, MRSS_ELEMENT_SKIPDAYS, &day);
+      mrss_new_subdata(item, MRSS_ELEMENT_ITEM_CATEGORY, &category);
+    `
+
+  Params:
+    element = parent element
+    subelement = type of the child (MRSS_ELEMENT_ITEM, MRSS_ELEMENT_CATEGORY, ...)
+    subdata =  pointer to the new struct. If the pointer of *subdata does not exist it will be allocated otherwise not
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_new_subdata	(mrss_generic_t	element,
 					 mrss_element_t	subelement,
 					 mrss_generic_t	subdata);
 
 /**
- * This function removes a subdata element. As first argoment you must specify
- * the parent, and second argoment the child.
- * \code
- * mrss_remove_subdata(mrss, item);
- * \endcode
- * \param element it is the parent
- * \param subdata the child that you want remove. Remember: 
- * mrss_remove_subdata does not free the memory. So you can remove a item
- * and reinsert it after.
- * \return the error code
- */
+  Removes a subdata element.
+  Params:
+    element = parent
+    subdata = child to remove
+  Does not free the memory. So you can remove a item and reinsert it after.
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_remove_subdata	(mrss_generic_t	element,
 					 mrss_generic_t	subdata);
 
-/* TAGS FUNCTIONS **********************************************************/
+/**
+Tags Functions:
+*/
 
 /**
- * This function search a tag in a mrss_t, a mrss_item_t or a mrss_tag_t from
- *  name and a namespace.
- * \param element it is the parent node (mrss_t or mrss_item_t)
- * \param name the name of the element
- * \param ns the namespace. It can be null if the tag has a null namespace
- * \param tag the return pointer
- * \return the error code
- */
+  Search a tag in a mrss_t, a mrss_item_t or a mrss_tag_t from name and a namespace.
+  Params:
+    element = it is the parent node (mrss_t or mrss_item_t)
+    name = the name of the element
+    ns = the namespace. It can be null if the tag has a null namespace
+    tag = the return pointer
+  Returns:
+    the error code
+*/
 mrss_error_t	mrss_search_tag		(mrss_generic_t	element,
 					 char *		name,
 					 char *		ns,
 					 mrss_tag_t **	tag);
 
 /**
- * This function search an attribute from a mrss_tag_t, a name and a namespace
- * \param element it is the mrss_tag_t
- * \param name the name of the element
- * \param ns the namespace. It can be null if the tag has a null namespace
- * \param attribute the return pointer
- * \return the error code
+  This function searches an attribute from a mrss_tag_t, a name and a namespace
+  Params:
+    element = it is the mrss_tag_t
+    name = the name of the element
+    ns = the namespace. It can be null if the tag has a null namespace
+    attribute = the return pointer
+  Returns:
+    the error code
  */
 mrss_error_t	mrss_search_attribute	(mrss_generic_t	element,
 					 char *		name,
 					 char *		ns,
 					 mrss_attribute_t ** attribute);
 
-/* OPTIONS FUNCTIONS *******************************************************/
+/**
+  OPTIONS FUNCTIONS:
+*/
 
 /**
- * This function creates a options struct.
- * 
- * \param timeout timeout for the download procedure
- * \param proxy a proxy server. can be NULL
- * \param proxy_authentication a proxy authentication (user:pwd). can be NULL
- * \param certfile a certificate for ssl autentication connection
- * \param password the password of certfile
- * \param cacert CA certificate to verify peer against. can be NULL
- * \param verifypeer active/deactive the peer check
- * \param authentication an authentication login (user:pwd). can be NULL
- * \param user_agent a user_agent. can be NULL
- * \return a pointer to a new allocated mrss_options_t struct 
+  This function creates a options struct.
+  
+    Params:
+      timeout = timeout for the download procedure
+      proxy = a proxy server. can be null
+      proxy_authentication = a proxy authentication (user:pwd). can be null
+      certfile = a certificate for ssl authentication connection
+      password = the password of certfile
+      cacert = CA certificate to verify peer against. can be null
+      verifypeer = active/deactive the peer check
+      authentication = an authentication login (user:pwd). can be null
+      user_agent = a user_agent. can be null
+ 
+    Returns:
+      a pointer to a new allocated mrss_options_t struct 
  */
 mrss_options_t *
 		mrss_options_new	(int timeout,
@@ -878,8 +964,9 @@ mrss_options_t *
 					 char *authentication,
 					 char *user_agent);
 
-/** 
- * This function destroys a options struct.
- * \param options a pointer to a options struct
- */
+/**
+  This function destroys a options struct.
+  Params:
+    options =  a pointer to a options struct
+*/
 void		mrss_options_free	(mrss_options_t *options);
