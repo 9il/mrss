@@ -749,7 +749,6 @@ mrss_error_t	mrss_element		(mrss_generic_t	element,
   Returns:
     the error code
 */
- */
 mrss_error_t	mrss_get_last_modified	(char *		urlstring,
 					 time_t *	lastmodified);
 
