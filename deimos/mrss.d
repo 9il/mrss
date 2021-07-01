@@ -327,40 +327,40 @@ struct mrss_item_t {
   /* Data: */
 
   				/* 0.91	0.92	1.0	2.0	ATOM	*/
-  char *title;			/* R	O	O	O	R	*/
-  char *title_type;		/* -	-	-	-	O	*/
-  char *link;			/* R	O	O	O	O	*/
-  char *description;		/* R	O	-	O	O	*/
-  char *description_type;	/* -	-	-	-	0	*/
-  char *copyright;		/* -	-	-	-	O	*/
-  char *copyright_type;		/* -	-	-	-	O	*/
+  char* title;			/* R	O	O	O	R	*/
+  char* title_type;		/* -	-	-	-	O	*/
+  char* link;			/* R	O	O	O	O	*/
+  char* description;		/* R	O	-	O	O	*/
+  char* description_type;	/* -	-	-	-	0	*/
+  char* copyright;		/* -	-	-	-	O	*/
+  char* copyright_type;		/* -	-	-	-	O	*/
   
-  char *author;			/* -	-	-	O	O	*/
-  char *author_uri;		/* -	-	-	-	O	*/
-  char *author_email;		/* -	-	-	-	O	*/
+  char* author;			/* -	-	-	O	O	*/
+  char* author_uri;		/* -	-	-	-	O	*/
+  char* author_email;		/* -	-	-	-	O	*/
 
-  char *contributor;		/* -	-	-	-	O	*/
-  char *contributor_uri;	/* -	-	-	-	O	*/
-  char *contributor_email;	/* -	-	-	-	O	*/
+  char* contributor;		/* -	-	-	-	O	*/
+  char* contributor_uri;	/* -	-	-	-	O	*/
+  char* contributor_email;	/* -	-	-	-	O	*/
 
-  char *comments;		/* -	-	-	O	-	*/
-  char *pubDate;		/* -	-	-	O	O	*/
-  char *guid;			/* -	-	-	O	O	*/
+  char* comments;		/* -	-	-	O	-	*/
+  char* pubDate;		/* -	-	-	O	O	*/
+  char* guid;			/* -	-	-	O	O	*/
   int guid_isPermaLink;		/* -	-	-	O	-	*/
 
-  char *source;			/* -	O	-	O	-	*/
-  char *source_url;		/* -	R	-	R	-	*/
+  char* source;			/* -	O	-	O	-	*/
+  char* source_url;		/* -	R	-	R	-	*/
 
-  char *enclosure;		/* -	O	-	O	-	*/
-  char *enclosure_url;		/* -	R	-	R	-	*/
+  char* enclosure;		/* -	O	-	O	-	*/
+  char* enclosure_url;		/* -	R	-	R	-	*/
   int enclosure_length;		/* -	R	-	R	-	*/
-  char *enclosure_type;		/* -	R	-	R	-	*/
+  char* enclosure_type;		/* -	R	-	R	-	*/
 
-  mrss_category_t *category;	/* -	O	-	O	O	*/
+  mrss_category_t* category;	/* -	O	-	O	O	*/
 
-  mrss_tag_t *other_tags;
+  mrss_tag_t* other_tags;
 
-  mrss_item_t *next;
+  mrss_item_t* next;
 }
 
 /**
@@ -373,8 +373,8 @@ struct mrss_hour_t {
 
   /* Data: */
   				/* 0.91	0.92	1.0	2.0	ATOM	*/
-  char *hour;			/* R	R	-	R	-	*/
-  mrss_hour_t *next;
+  char* hour;			/* R	R	-	R	-	*/
+  mrss_hour_t* next;
 }
 
 /**
@@ -387,8 +387,8 @@ struct mrss_day_t {
 
   /* Data: */
   				/* 0.91	0.92	1.0	2.0	ATOM	*/
-  char *day;			/* R	R	-	R	-	*/
-  mrss_day_t *next;
+  char* day;			/* R	R	-	R	-	*/
+  mrss_day_t* next;
 }
 
 /**
@@ -401,10 +401,10 @@ Data struct for category elements
 
   /* Data: */
   				/* 0.91	0.92	1.0	2.0	ATOM	*/
-  char *category;		/* -	R	-	R	R	*/
-  char *domain;			/* -	O	-	O	O	*/
-  char *label;			/* -	-	-	-	O	*/
-  mrss_category_t *next;
+  char* category;		/* -	R	-	R	R	*/
+  char* domain;			/* -	O	-	O	O	*/
+  char* label;			/* -	-	-	-	O	*/
+  mrss_category_t* next;
 }
 
 /**
@@ -418,76 +418,76 @@ struct mrss_t {
 
   /* Data: */
 
-  char *file;
+  char* file;
   size_t size;
-  char *encoding;
+  char* encoding;
 
   mrss_version_t version_;	/* 0.91	0.92	1.0	2.0	ATOM	*/
 
-  char *title;			/* R	R	R	R	R	*/
-  char *title_type;		/* -	-	-	-	O	*/
-  char *description;		/* R	R	R	R	R	*/
-  char *description_type;	/* -	-	-	-	O	*/
-  char *link;			/* R	R	R	R	O	*/
-  char *id;			/* 	-	-	-	-	O	*/
-  char *language;		/* R	O	-	O	O	*/
-  char *rating;			/* O	O	-	O	-	*/
-  char *copyright;		/* O	O	-	O	O	*/
-  char *copyright_type;		/* -	-	-	-	O	*/
-  char *pubDate;		/* O	O	-	O	-	*/
-  char *lastBuildDate;		/* O	O	-	O	O	*/
-  char *docs;			/* O	O	-	O	-	*/
-  char *managingeditor;		/* O	O	-	O	O	*/
-  char *managingeditor_email;	/* O	O	-	O	O	*/
-  char *managingeditor_uri;	/* O	O	-	O	O	*/
-  char *webMaster;		/* O	O	-	O	-	*/
+  char* title;			/* R	R	R	R	R	*/
+  char* title_type;		/* -	-	-	-	O	*/
+  char* description;		/* R	R	R	R	R	*/
+  char* description_type;	/* -	-	-	-	O	*/
+  char* link;			/* R	R	R	R	O	*/
+  char* id;			/* 	-	-	-	-	O	*/
+  char* language;		/* R	O	-	O	O	*/
+  char* rating;			/* O	O	-	O	-	*/
+  char* copyright;		/* O	O	-	O	O	*/
+  char* copyright_type;		/* -	-	-	-	O	*/
+  char* pubDate;		/* O	O	-	O	-	*/
+  char* lastBuildDate;		/* O	O	-	O	O	*/
+  char* docs;			/* O	O	-	O	-	*/
+  char* managingeditor;		/* O	O	-	O	O	*/
+  char* managingeditor_email;	/* O	O	-	O	O	*/
+  char* managingeditor_uri;	/* O	O	-	O	O	*/
+  char* webMaster;		/* O	O	-	O	-	*/
   int ttl;			/* -	-	-	O	-	*/
-  char *about;			/* -	-	R	-	-	*/
+  char* about;			/* -	-	R	-	-	*/
   
   /// Contributor:		/* -	-	-	-	O	*/
-  char *contributor;		/* -	-	-	-	R	*/
-  char *contributor_email;	/* -	-	-	-	O	*/
-  char *contributor_uri;	/* -	-	-	-	O	*/
+  char* contributor;		/* -	-	-	-	R	*/
+  char* contributor_email;	/* -	-	-	-	O	*/
+  char* contributor_uri;	/* -	-	-	-	O	*/
 
   /// Generator:
-  char *generator;		/* -	-	-	O	O	*/
-  char *generator_uri;		/* -	-	-	-	O	*/
-  char *generator_version;	/* -	-	-	-	O	*/
+  char* generator;		/* -	-	-	O	O	*/
+  char* generator_uri;		/* -	-	-	-	O	*/
+  char* generator_version;	/* -	-	-	-	O	*/
 
   /// Tag Image:		/* O	O	O	O	-	*/
-  char *image_title;		/* R	R	R	R	-	*/
-  char *image_url;		/* R	R	R	R	O	*/
-  char *image_logo;		/* -	-	-	-	O	*/
-  char *image_link;		/* R	R	R	R	-	*/
+  char* image_title;		/* R	R	R	R	-	*/
+  char* image_url;		/* R	R	R	R	O	*/
+  char* image_logo;		/* -	-	-	-	O	*/
+  char* image_link;		/* R	R	R	R	-	*/
   uint image_width;	/* O	O	-	O	-	*/
   uint image_height;	/* O	O	-	O	-	*/
-  char *image_description;	/* O	O	-	O	-	*/
+  char* image_description;	/* O	O	-	O	-	*/
 
   /// TextInput: 		/* O	O	O	O	-	*/
-  char *textinput_title;	/* R	R	R	R	-	*/
-  char *textinput_description;	/* R	R	R	R	-	*/
-  char *textinput_name;		/* R	R	R	R	-	*/
-  char *textinput_link;		/* R	R	R	R	-	*/
+  char* textinput_title;	/* R	R	R	R	-	*/
+  char* textinput_description;	/* R	R	R	R	-	*/
+  char* textinput_name;		/* R	R	R	R	-	*/
+  char* textinput_link;		/* R	R	R	R	-	*/
 
   /// Cloud:
-  char *cloud;			/* -	O	-	O	-	*/
-  char *cloud_domain;		/* -	R	-	R	-	*/
+  char* cloud;			/* -	O	-	O	-	*/
+  char* cloud_domain;		/* -	R	-	R	-	*/
   int cloud_port;		/* -	R	-	R	-	*/
-  char *cloud_path;		/* -	R	-	R	-	*/
-  char *cloud_registerProcedure;/* -	R	-	R	-	*/
-  char *cloud_protocol;		/* -	R	-	R	-	*/
+  char* cloud_path;		/* -	R	-	R	-	*/
+  char* cloud_registerProcedure;/* -	R	-	R	-	*/
+  char* cloud_protocol;		/* -	R	-	R	-	*/
 
-  mrss_hour_t *skipHours;	/* O	O	-	O	-	*/
-  mrss_day_t *skipDays;		/* O	O	-	O	-	*/
+  mrss_hour_t* skipHours;	/* O	O	-	O	-	*/
+  mrss_day_t* skipDays;		/* O	O	-	O	-	*/
 
-  mrss_category_t *category;	/* -	O	-	O	O	*/
+  mrss_category_t* category;	/* -	O	-	O	O	*/
 
-  mrss_item_t *item;		/* R	R	R	R	R	*/
+  mrss_item_t* item;		/* R	R	R	R	R	*/
 
-  mrss_tag_t *other_tags;
+  mrss_tag_t* other_tags;
 
   version (MRSS_USE_LOCALE)
-    void *c_locale;
+    void* c_locale;
 }
 
 /**
@@ -500,21 +500,21 @@ struct mrss_tag_t {
   int allocated;
 
   /// name of the tag
-  char *name;
+  char* name;
 
-  char *value;
+  char* value;
 
   /// namespace
-  char *ns;
+  char* ns;
 
   /// list of attributes
-  mrss_attribute_t *attributes;
+  mrss_attribute_t* attributes;
 
   /// Sub tags
-  mrss_tag_t *children;
+  mrss_tag_t* children;
 
   /// the next tag
-  mrss_tag_t *next;
+  mrss_tag_t* next;
 }
 
 /**
@@ -527,16 +527,16 @@ struct mrss_attribute_t {
   int allocated;
 
   /// name of the tag
-  char *name;
+  char* name;
 
   /// value
-  char *value;
+  char* value;
 
   /// namespace
-  char *ns;
+  char* ns;
   
   /// The next attribute
-  mrss_attribute_t *next;
+  mrss_attribute_t* next;
 }
 
 /**
@@ -544,14 +544,14 @@ Options data struct. It contains some user preferences.
 */
 struct mrss_options_t {
   int timeout;
-  char *proxy;
-  char *proxy_authentication;
-  char *certfile;
-  char *cacert;
-  char *password;
+  char* proxy;
+  char* proxy_authentication;
+  char* certfile;
+  char* cacert;
+  char* password;
   int verifypeer;
-  char *authentication;
-  char *user_agent;
+  char* authentication;
+  char* user_agent;
 }
 
 /**
@@ -567,8 +567,8 @@ Params:
 Returns:
   the error code
 */
-mrss_error_t	mrss_parse_url		(char *		url,
-					 mrss_t **	mrss);
+mrss_error_t	mrss_parse_url		(char* 		url,
+					 mrss_t**	mrss);
 
 /**
 Parses a url and creates the data struct of the feed RSS url.
@@ -582,9 +582,9 @@ Returns:
   the error code
 */
 mrss_error_t	mrss_parse_url_with_options
-					(char *		url,
-					 mrss_t **	mrss,
-					 mrss_options_t	* options);
+					(char* 		url,
+					 mrss_t**	mrss,
+					 mrss_options_t* options);
 
 /**
 Parses a url and creates the data struct of the feed RSS url.
@@ -599,10 +599,10 @@ Returns:
   the error code
 */
 mrss_error_t	mrss_parse_url_with_options_and_error
-					(char *		url,
-					 mrss_t **	mrss,
-					 mrss_options_t	* options,
-					 CURLcode *	curlcode);
+					(char* 		url,
+					 mrss_t**	mrss,
+					 mrss_options_t* options,
+					 CURLcode*	curlcode);
 
 /**
 Like the previous function but you take ownership of the downloaded buffer
@@ -618,12 +618,12 @@ Returns:
   the error code
 */
 mrss_error_t	mrss_parse_url_with_options_error_and_transfer_buffer
-					(char *		url,
-					 mrss_t **	mrss,
-					 mrss_options_t	* options,
-					 CURLcode *	curlcode,
-					 char **	feed_content,
-					 int  *		feed_size);
+					(char* 		url,
+					 mrss_t**	mrss,
+					 mrss_options_t* options,
+					 CURLcode*	curlcode,
+					 char**	feed_content,
+					 int*		feed_size);
 
 /** 
 Parses a file and creates the data struct of the feed RSS url
@@ -633,8 +633,8 @@ Params:
 Returns:
   the error code
 */
-mrss_error_t	mrss_parse_file		(char *		file,
-					 mrss_t **	mrss);
+mrss_error_t	mrss_parse_file		(char* 		file,
+					 mrss_t**	mrss);
 
 /** 
   Parses a buffer and creates the data struct of the feed RSS url
@@ -645,9 +645,9 @@ mrss_error_t	mrss_parse_file		(char *		file,
   Returns:
     the error code
 */
-mrss_error_t	mrss_parse_buffer	(char *		buffer,
+mrss_error_t	mrss_parse_buffer	(char* 		buffer,
 					 size_t		size_buffer,
-					 mrss_t **	mrss);
+					 mrss_t**	mrss);
 
 /**
   Write Functions:
@@ -661,14 +661,14 @@ Params:
 Returns:
   the error code
 */
-mrss_error_t	mrss_write_file		(mrss_t *	mrss,
-					 char *		file);
+mrss_error_t	mrss_write_file		(mrss_t*	mrss,
+					 char* 		file);
 
 /**
  Write a RSS struct data in a buffer.
 
 `
-  char *buffer;
+  char* buffer;
   buffer=null; //<--- This is important!!
   mrss_write_buffer (mrss, &buffer);
 `
@@ -681,7 +681,7 @@ Returns:
   the error code
 */
 mrss_error_t	mrss_write_buffer	(mrss_t *	mrss,
-					 char **	buffer);
+					 char**	buffer);
 
 /**
 Free Function:
@@ -715,7 +715,7 @@ Generic Functions:
   Returns:
     a string. Don't free this string!
 */
-char *		mrss_strerror		(mrss_error_t	err);
+char* 		mrss_strerror		(mrss_error_t	err);
 
 /** 
 This function returns a static string with the description of curl code
@@ -724,7 +724,7 @@ Params:
 Returns:
   a string. Don't free this string!
 */
-char *		mrss_curl_strerror	(CURLcode	err);
+char* 		mrss_curl_strerror	(CURLcode	err);
 
 /**
   Returns the mrss_element_t of a mrss data struct.
@@ -735,7 +735,7 @@ char *		mrss_curl_strerror	(CURLcode	err);
     the error code
 */
 mrss_error_t	mrss_element		(mrss_generic_t	element,
-					 mrss_element_t *ret);
+					 mrss_element_t* ret);
 
 /**
   Returns the number of seconds sinze January 1st 1970 in the
@@ -749,8 +749,8 @@ mrss_error_t	mrss_element		(mrss_generic_t	element,
   Returns:
     the error code
 */
-mrss_error_t	mrss_get_last_modified	(char *		urlstring,
-					 time_t *	lastmodified);
+mrss_error_t	mrss_get_last_modified	(char* 		urlstring,
+					 time_t*	lastmodified);
 
 /**
   Returns the number of seconds sinze January 1st 1970 in the
@@ -766,9 +766,9 @@ mrss_error_t	mrss_get_last_modified	(char *		urlstring,
     the error code
  */
 mrss_error_t	mrss_get_last_modified_with_options
-					(char *		urlstring,
-					 time_t *	lastmodified,
-					 mrss_options_t * options);
+					(char* 		urlstring,
+					 time_t* 	lastmodified,
+					 mrss_options_t* options);
 /**
   Returns the number of seconds sinze January 1st 1970 in the
   UTC time zone, for the url that the urlstring parameter specifies.
@@ -784,10 +784,10 @@ mrss_error_t	mrss_get_last_modified_with_options
   the error code
 */
 mrss_error_t	mrss_get_last_modified_with_options_and_error
-					(char *		urlstring,
-					 time_t *	lastmodified,
-					 mrss_options_t * options,
-					 CURLcode *	curl_code);
+					(char* 		urlstring,
+					 time_t* 	lastmodified,
+					 mrss_options_t* options,
+					 CURLcode*	curl_code);
 
 /**
   Edit Functions:
@@ -799,7 +799,7 @@ mrss_error_t	mrss_get_last_modified_with_options_and_error
   `
     mrss_t *d;
     mrss_error_t err;
-    char *string;
+    char* string;
     int integer;
 
     d=null; // ->this is important! If d!=null, mrss_new doesn't alloc memory.
@@ -825,7 +825,7 @@ mrss_error_t	mrss_get_last_modified_with_options_and_error
   Returns:
     the error code
 */
-mrss_error_t	mrss_new		(mrss_t **	mrss);
+mrss_error_t	mrss_new		(mrss_t**	mrss);
 
 /**
 For insert/replace/remove a flags use this function as this example:
@@ -845,7 +845,7 @@ mrss_error_t	mrss_set		(mrss_generic_t	element,
 
 /**
   returns the request arguments. The syntax is the same of mrss_set but the values of the list are
-  pointer to data element (int *, * char **). If the key needs a char **, the value will be allocated.
+  pointer to data element (int *, * char* *). If the key needs a char* *, the value will be allocated.
 
   `
     mrss_get(category, MRSS_FLAG_CATEGORY_DOMAIN, &string, MRSS_FLAG_END);
@@ -912,9 +912,9 @@ Tags Functions:
     the error code
 */
 mrss_error_t	mrss_search_tag		(mrss_generic_t	element,
-					 char *		name,
-					 char *		ns,
-					 mrss_tag_t **	tag);
+					 char* 		name,
+					 char* 		ns,
+					 mrss_tag_t**	tag);
 
 /**
   This function searches an attribute from a mrss_tag_t, a name and a namespace
@@ -927,9 +927,9 @@ mrss_error_t	mrss_search_tag		(mrss_generic_t	element,
     the error code
  */
 mrss_error_t	mrss_search_attribute	(mrss_generic_t	element,
-					 char *		name,
-					 char *		ns,
-					 mrss_attribute_t ** attribute);
+					 char* 		name,
+					 char* 		ns,
+					 mrss_attribute_t** attribute);
 
 /**
   OPTIONS FUNCTIONS:
@@ -954,18 +954,18 @@ mrss_error_t	mrss_search_attribute	(mrss_generic_t	element,
  */
 mrss_options_t *
 		mrss_options_new	(int timeout,
-					 char *proxy,
-					 char *proxy_authentication,
-					 char *certfile,
-					 char *password,
-					 char *cacert,
+					 char* proxy,
+					 char* proxy_authentication,
+					 char* certfile,
+					 char* password,
+					 char* cacert,
 					 int verifypeer,
-					 char *authentication,
-					 char *user_agent);
+					 char* authentication,
+					 char* user_agent);
 
 /**
   This function destroys a options struct.
   Params:
     options =  a pointer to a options struct
 */
-void		mrss_options_free	(mrss_options_t *options);
+void		mrss_options_free	(mrss_options_t* options);
